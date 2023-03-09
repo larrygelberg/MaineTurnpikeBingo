@@ -1,0 +1,171 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="stylesheet" type="text/css" href="MTBingo_style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script src="MTBingo.js"></script>
+  <script>
+    $( document ).ready(function() {
+      refreshPatterns();
+    });
+  </script>
+
+</head>
+<body>
+  <center>
+  <h1>Maine Turnpike Bingo</h1>
+  <br/>
+
+  <!-- Control Center -->
+  <button id="refreshButton" class="btn-class" type="button" onclick="refreshPatterns()">Another!</button>
+  <br/>
+  <p/>
+
+  <!-- Row 0 -->
+  <div class="containing-table">
+    <div id="c00" class="centre-align border-cell" onclick="javascript:myFunction('c00');">
+      <div class="content">
+        <h3 id="00"></h3>
+      </div>
+    </div>
+    <div id="c01" class="centre-align border-cell" onclick="javascript:myFunction('c01');">
+      <div class="content">
+        <h3 id="01"></h3>
+      </div>
+    </div>
+    <div id="c02" class="centre-align border-cell" onclick="javascript:myFunction('c02');">
+      <div class="content">
+        <h3 id="02"></h3>
+      </div>
+    </div>
+    <div id="c03" class="centre-align border-cell" onclick="javascript:myFunction('c03');">
+      <div class="content">
+        <h3 id="03"></h3>
+      </div>
+    </div>
+    <div id="c04" class="centre-align border-cell" onclick="javascript:myFunction('c04');">
+      <div class="content">
+        <h3 id="04"></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 1 -->
+  <div class="containing-table">
+    <div id="c10" class="centre-align border-cell" onclick="javascript:myFunction('c10');">
+      <div class="content">
+        <h3 id="10"></h3>
+      </div>
+    </div>
+    <div id="c11" class="centre-align border-cell" onclick="javascript:myFunction('c11');">
+      <div class="content">
+        <h3 id="11"></h3>
+      </div>
+    </div>
+    <div id="c12" class="centre-align border-cell" onclick="javascript:myFunction('c12');">
+      <div class="content">
+        <h3 id="12"></h3>
+      </div>
+    </div>
+    <div id="c13" class="centre-align border-cell" onclick="javascript:myFunction('c13');">
+      <div class="content">
+        <h3 id="13"></h3>
+      </div>
+    </div>
+    <div id="c14" class="centre-align border-cell" onclick="javascript:myFunction('c14');">
+      <div class="content">
+        <h3 id="14"></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="containing-table">
+    <div id="c20" class="centre-align border-cell" onclick="javascript:myFunction('c20');">
+      <div class="content">
+        <h3 id="20"></h3>
+      </div>
+    </div>
+    <div id="c21" class="centre-align border-cell" onclick="javascript:myFunction('c21');">
+      <div class="content">
+        <h3 id="21"></h3>
+      </div>
+    </div>
+    <div id="c22" class="centre-align border-cell" style="background-color: lightgreen;">
+      <div class="content">
+        <h2 id="22">FREE SPACE!</h2>
+      </div>
+    </div>
+    <div id="c23" class="centre-align border-cell" onclick="javascript:myFunction('c23');">
+      <div class="content">
+        <h3 id="23"></h3>
+      </div>
+    </div>
+    <div id="c24" class="centre-align border-cell" onclick="javascript:myFunction('c24');">
+      <div class="content">
+        <h3 id="24"></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="containing-table">
+    <div id="c30" class="centre-align border-cell" onclick="javascript:myFunction('c30');">
+      <div class="content">
+        <h3 id="30"></h3>
+      </div>
+    </div>
+    <div id="c31" class="centre-align border-cell" onclick="javascript:myFunction('c31');">
+      <div class="content">
+        <h3 id="31"></h3>
+      </div>
+    </div>
+    <div id="c32" class="centre-align border-cell" onclick="javascript:myFunction('c32');">
+      <div class="content">
+        <h3 id="32"></h3>
+      </div>
+    </div>
+    <div id="c33" class="centre-align border-cell" onclick="javascript:myFunction('c33');">
+      <div class="content">
+        <h3 id="33"></h3>
+      </div>
+    </div>
+    <div id="c34" class="centre-align border-cell" onclick="javascript:myFunction('c34');">
+      <div class="content">
+        <h3 id="34"></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 4 -->
+  <div class="containing-table">
+    <div id="c40" class="centre-align border-cell" onclick="javascript:myFunction('c40');">
+      <div class="content">
+        <h3 id="40"></h3>
+      </div>
+    </div>
+    <div id="c41" class="centre-align border-cell" onclick="javascript:myFunction('c41');">
+      <div class="content">
+        <h3 id="41"></h3>
+      </div>
+    </div>
+    <div id="c42" class="centre-align border-cell" onclick="javascript:myFunction('c42');">
+      <div class="content">
+        <h3 id="42"></h3>
+      </div>
+    </div>
+    <div id="c43" class="centre-align border-cell" onclick="javascript:myFunction('c43');">
+      <div class="content">
+        <h3 id="43"></h3>
+      </div>
+    </div>
+    <div id="c44" class="centre-align border-cell" onclick="javascript:myFunction('c44');">
+      <div class="content">
+        <h3 id="44"></h3>
+      </div>
+    </div>
+  </div>
+
+</center>
+</body>
