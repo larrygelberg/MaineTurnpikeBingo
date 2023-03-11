@@ -5,8 +5,7 @@
  */
 
 const vehicles = [
-  "Crossing the Bridge into Maine",
-  "Crossing the Bridge into New Hampshire",
+  "Hampton Tolls Backup",
   "Airstream",
   "Generic Tow-Behind Camper",
   "Tow-Behind Pop-up Camper",
@@ -30,7 +29,7 @@ const vehicles = [
   "A Boat Being Towed",
   "A Pontoon Boat Being Towed",
   "'Sunday River' sticker",
-  "A Stupid Tesla",
+  "Fucking Tesla",
   "A Hanaford's Truck",
   "Florida License Plate",
   "New York License Plate",
@@ -43,19 +42,14 @@ const vehicles = [
   "State Trooper - Lights On",
   "Road Kill",
   "A Car with Bikes on the Back",
+  "A Car with Bikes on the Top",
   "Horse Trailer",
   "U-Haul",
   "Thule Topper",
   "Ski Rack w/ Skis or Snowboards"
 ];
 
-var statusTable = [
-  [false, false, false, false, false],
-  [false, false, false, false, false],
-  [false, false, true, false, false],
-  [false, false, false, false, false],
-  [false, false, false, false, false]
-];
+var statusTable = [];
 
 var usedIndexes = [];
 
@@ -75,63 +69,98 @@ function getMessage() {
   return vehicles[getRandIndex()];
 };
 
-function refreshPatterns() {
+function refreshGrid() {
   usedIndexes = [];
 
   for (var i=0; i<5; i++) { 
     for (var j=0; j<5; j++) {
-      if (i == 2 && j == 2)
-        continue;
-
-      cell = i.toString().concat(j.toString());
-      msg = getMessage();
-      document.getElementById(cell).innerHTML = msg;
+      if (i == 2 && j == 2) {
+        document.getElementById("c22").style.backgroundColor = "lightgreen";
+      } else {
+        cell = i.toString().concat(j.toString());
+        msg = getMessage();
+        document.getElementById(cell).innerHTML = msg;
+        outerDiv = "c".concat(cell);
+        document.getElementById(outerDiv).style.backgroundColor = null;
     }
+    }
+    statusTable.push([false, false, false, false, false]);
   }
+  statusTable[2][2] = true;
 }
 
-function myFunction(id) { 
-  document.getElementById(id).style.backgroundColor = "lightgreen";
+function toggleCell(id) { 
   var i = id[1];
   var j = id[2];
-  statusTable[i][j] = true;
+  if (statusTable[i][j]) {
+    // toggle sqaure off
+    document.getElementById(id).style.backgroundColor = null;
+    statusTable[i][j] = false;
+  } else {
+    document.getElementById(id).style.backgroundColor = "lightgreen";
+    statusTable[i][j] = true;
+  }
 
-  /* test rows */
-  for (index_i=0; index_i<5; index_i++) {
+  test_rows();
+  test_columns();
+  test_ul_to_lr();
+  test_ur_to_ll();
+}
+
+function test_rows() {
+  for (var index_i=0; index_i<=4; index_i++) {
     var winner = true;
-    for (index_j=0; index_j<5; index_j++) {
-      statusTable[index_i][index_j] = winner && statusTable[index_i][index_j];
+    for (var index_j=0; index_j<=4; index_j++) {
+      winner = winner && statusTable[index_i][index_j];
     }
     if (winner) {
-      paint_row(index_i);
+      for (var i=0; i<5; i++) {
+        var id = "c".concat(index_i,i);
+        document.getElementById(id).style.backgroundColor = "blue";
+      }
       break;
     } 
   }
-  /* test columns */
-  /*
-  for (index_i=0; index_i<5; index_i++) {
+}
+
+function test_columns() {
+  for (var index_i=0; index_i<=4; index_i++) {
     var winner = true;
-    for (index_j=0; index_j<5; index_j++) {
-      statusTable[index_j][index_i] = winner && statusTable[index_j][index_i];
+    for (var index_j=0; index_j<=4; index_j++) {
+      winner = winner && statusTable[index_j][index_i];
     }
     if (winner) {
-      paint_col(index_j);
+      for (var i=0; i<5; i++) {
+        var id = "c".concat(i,index_i);
+        document.getElementById(id).style.backgroundColor = "blue";
+      }
       break;
     } 
   }
-  */
 }
 
-function paint_row(idx) {
-  for (i=0; i<5; i++) {
-    var id = "c".concat(idx,i);
-    document.getElementById(id).style.backgroundColor = "blue";
+function test_ul_to_lr () {
+  var winner = true;
+  for (var index_i=0; index_i<=4; index_i++) {
+    winner = winner && statusTable[index_i][index_i];
+  }
+  if (winner) {
+    for (i=0; i<5; i++) {
+      var id = "c".concat(i,i);
+      document.getElementById(id).style.backgroundColor = "blue";
+    }
   }
 }
 
-function paint_col(idx) {
-  for (i=0; i<5; i++) {
-    var id = "c".concat(i,idx);
-    document.getElementById(id).style.backgroundColor = "blue";
+function test_ur_to_ll() {
+  var winner = true;
+  for (var index_i=0; index_i<=4; index_i++) {
+    winner = winner && statusTable[4-index_i][index_i];
   }
+  if (winner) {
+    for (i=0; i<5; i++) {
+      var id = "c".concat(4-i,i);
+      document.getElementById(id).style.backgroundColor = "blue";
+    }
+  } 
 }

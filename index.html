@@ -7,7 +7,7 @@
   <script src="MTBingo.js"></script>
   <script>
     $( document ).ready(function() {
-      refreshPatterns();
+      refreshGrid();
     });
   </script>
 
@@ -15,36 +15,38 @@
 <body>
   <center>
   <h1>Maine Turnpike Bingo</h1>
+  <p>New!  Improved!</p>
+  <p>Now, you can either print this sheet OR play online by clicking the squares!</p>
   <br/>
 
   <!-- Control Center -->
-  <button id="refreshButton" class="btn-class" type="button" onclick="refreshPatterns()">Another!</button>
+  <button id="refreshButton" class="btn-class" type="button" onclick="refreshGrid()">Another!</button>
   <br/>
   <p/>
 
   <!-- Row 0 -->
   <div class="containing-table">
-    <div id="c00" class="centre-align border-cell" onclick="javascript:myFunction('c00');">
+    <div id="c00" class="centre-align border-cell" onclick="javascript:toggleCell('c00');">
       <div class="content">
         <h3 id="00"></h3>
       </div>
     </div>
-    <div id="c01" class="centre-align border-cell" onclick="javascript:myFunction('c01');">
+    <div id="c01" class="centre-align border-cell" onclick="javascript:toggleCell('c01');">
       <div class="content">
         <h3 id="01"></h3>
       </div>
     </div>
-    <div id="c02" class="centre-align border-cell" onclick="javascript:myFunction('c02');">
+    <div id="c02" class="centre-align border-cell" onclick="javascript:toggleCell('c02');">
       <div class="content">
         <h3 id="02"></h3>
       </div>
     </div>
-    <div id="c03" class="centre-align border-cell" onclick="javascript:myFunction('c03');">
+    <div id="c03" class="centre-align border-cell" onclick="javascript:toggleCell('c03');">
       <div class="content">
         <h3 id="03"></h3>
       </div>
     </div>
-    <div id="c04" class="centre-align border-cell" onclick="javascript:myFunction('c04');">
+    <div id="c04" class="centre-align border-cell" onclick="javascript:toggleCell('c04');">
       <div class="content">
         <h3 id="04"></h3>
       </div>
@@ -53,27 +55,27 @@
 
   <!-- Row 1 -->
   <div class="containing-table">
-    <div id="c10" class="centre-align border-cell" onclick="javascript:myFunction('c10');">
+    <div id="c10" class="centre-align border-cell" onclick="javascript:toggleCell('c10');">
       <div class="content">
         <h3 id="10"></h3>
       </div>
     </div>
-    <div id="c11" class="centre-align border-cell" onclick="javascript:myFunction('c11');">
+    <div id="c11" class="centre-align border-cell" onclick="javascript:toggleCell('c11');">
       <div class="content">
         <h3 id="11"></h3>
       </div>
     </div>
-    <div id="c12" class="centre-align border-cell" onclick="javascript:myFunction('c12');">
+    <div id="c12" class="centre-align border-cell" onclick="javascript:toggleCell('c12');">
       <div class="content">
         <h3 id="12"></h3>
       </div>
     </div>
-    <div id="c13" class="centre-align border-cell" onclick="javascript:myFunction('c13');">
+    <div id="c13" class="centre-align border-cell" onclick="javascript:toggleCell('c13');">
       <div class="content">
         <h3 id="13"></h3>
       </div>
     </div>
-    <div id="c14" class="centre-align border-cell" onclick="javascript:myFunction('c14');">
+    <div id="c14" class="centre-align border-cell" onclick="javascript:toggleCell('c14');">
       <div class="content">
         <h3 id="14"></h3>
       </div>
@@ -82,12 +84,12 @@
 
   <!-- Row 2 -->
   <div class="containing-table">
-    <div id="c20" class="centre-align border-cell" onclick="javascript:myFunction('c20');">
+    <div id="c20" class="centre-align border-cell" onclick="javascript:toggleCell('c20');">
       <div class="content">
         <h3 id="20"></h3>
       </div>
     </div>
-    <div id="c21" class="centre-align border-cell" onclick="javascript:myFunction('c21');">
+    <div id="c21" class="centre-align border-cell" onclick="javascript:toggleCell('c21');">
       <div class="content">
         <h3 id="21"></h3>
       </div>
@@ -97,12 +99,12 @@
         <h2 id="22">FREE SPACE!</h2>
       </div>
     </div>
-    <div id="c23" class="centre-align border-cell" onclick="javascript:myFunction('c23');">
+    <div id="c23" class="centre-align border-cell" onclick="javascript:toggleCell('c23');">
       <div class="content">
         <h3 id="23"></h3>
       </div>
     </div>
-    <div id="c24" class="centre-align border-cell" onclick="javascript:myFunction('c24');">
+    <div id="c24" class="centre-align border-cell" onclick="javascript:toggleCell('c24');">
       <div class="content">
         <h3 id="24"></h3>
       </div>
@@ -111,27 +113,27 @@
 
   <!-- Row 3 -->
   <div class="containing-table">
-    <div id="c30" class="centre-align border-cell" onclick="javascript:myFunction('c30');">
+    <div id="c30" class="centre-align border-cell" onclick="javascript:toggleCell('c30');">
       <div class="content">
         <h3 id="30"></h3>
       </div>
     </div>
-    <div id="c31" class="centre-align border-cell" onclick="javascript:myFunction('c31');">
+    <div id="c31" class="centre-align border-cell" onclick="javascript:toggleCell('c31');">
       <div class="content">
         <h3 id="31"></h3>
       </div>
     </div>
-    <div id="c32" class="centre-align border-cell" onclick="javascript:myFunction('c32');">
+    <div id="c32" class="centre-align border-cell" onclick="javascript:toggleCell('c32');">
       <div class="content">
         <h3 id="32"></h3>
       </div>
     </div>
-    <div id="c33" class="centre-align border-cell" onclick="javascript:myFunction('c33');">
+    <div id="c33" class="centre-align border-cell" onclick="javascript:toggleCell('c33');">
       <div class="content">
         <h3 id="33"></h3>
       </div>
     </div>
-    <div id="c34" class="centre-align border-cell" onclick="javascript:myFunction('c34');">
+    <div id="c34" class="centre-align border-cell" onclick="javascript:toggleCell('c34');">
       <div class="content">
         <h3 id="34"></h3>
       </div>
@@ -140,27 +142,27 @@
 
   <!-- Row 4 -->
   <div class="containing-table">
-    <div id="c40" class="centre-align border-cell" onclick="javascript:myFunction('c40');">
+    <div id="c40" class="centre-align border-cell" onclick="javascript:toggleCell('c40');">
       <div class="content">
         <h3 id="40"></h3>
       </div>
     </div>
-    <div id="c41" class="centre-align border-cell" onclick="javascript:myFunction('c41');">
+    <div id="c41" class="centre-align border-cell" onclick="javascript:toggleCell('c41');">
       <div class="content">
         <h3 id="41"></h3>
       </div>
     </div>
-    <div id="c42" class="centre-align border-cell" onclick="javascript:myFunction('c42');">
+    <div id="c42" class="centre-align border-cell" onclick="javascript:toggleCell('c42');">
       <div class="content">
         <h3 id="42"></h3>
       </div>
     </div>
-    <div id="c43" class="centre-align border-cell" onclick="javascript:myFunction('c43');">
+    <div id="c43" class="centre-align border-cell" onclick="javascript:toggleCell('c43');">
       <div class="content">
         <h3 id="43"></h3>
       </div>
     </div>
-    <div id="c44" class="centre-align border-cell" onclick="javascript:myFunction('c44');">
+    <div id="c44" class="centre-align border-cell" onclick="javascript:toggleCell('c44');">
       <div class="content">
         <h3 id="44"></h3>
       </div>
