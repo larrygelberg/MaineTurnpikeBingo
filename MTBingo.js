@@ -20,38 +20,50 @@ const vehicles = [
   "Pick-Up Truck with Camper on Top",
   "Pick-Up Truck Towing a Camper with Bed Ledge",
   "WalMart Truck",
-  "Car with 1 Kayak on Top",
-  "Car with 2 Kayaks on Top",
-  "Dirt Bikes being Towed",
-  "ATVs being Towed",
-  "Ski-Mobiles being Towed",
-  "Jet Skis Being Towed",
-  "A Boat Being Towed",
-  "A Pontoon Boat Being Towed",
-  "'Sunday River' sticker",
-  "Fucking Tesla",
-  "A Hanaford's Truck",
+  "Ski Resort Sticker",
+  "Grateful Dead Sticker",
+  "A Stupid Tesla",
+  "A Hannaford's Truck",
+  "A Lumber Truck",
   "Florida License Plate",
   "New York License Plate",
   "Connecticut License Plate",
   "Rhode Island License Plate",
+  "Vermont License Plate",
   "Quebec License Plate",
   "A Masshole",
-  "New Hampshire Plates Tailgating You",
+  "New Hampshire License Plate",
   "State Trooper - Lights Off",
   "State Trooper - Lights On",
   "Road Kill",
-  "A Car with Bikes on the Back",
-  "A Car with Bikes on the Top",
   "Horse Trailer",
   "U-Haul",
   "Thule Topper",
-  "Ski Rack w/ Skis or Snowboards"
+  "A Chopper",
+  "3 or More Motorcycles in a Pack",
+];
+
+const summerOnly = [
+  "Jet Skis Being Towed",
+  "A Boat Being Towed",
+  "A Pontoon Boat Being Towed",
+  "Car with Kayaks/Canoes on Top", 
+  "A Car with Bikes on the Back",
+  "A Car with Bikes on the Top",
+  "Dirt Bikes being Towed",
+  "ATVs being Towed"
+];
+
+const winterOnly = [
+  "Ski Rack w/ Skis or Snowboards",
+  "Ski-Mobiles being Towed",
+  "A Christmas Tree Truck",
+  "A Plow Gang"
 ];
 
 var statusTable = [];
-
 var usedIndexes = [];
+var consolidatedTable = [];
 
 function getRandIndex() {
   var count = 0;
@@ -59,20 +71,41 @@ function getRandIndex() {
   do {
     if (count++ > 1000)
       break;
-    rand = Math.floor(Math.random() * vehicles.length);
+    rand = Math.floor(Math.random() * consolidatedTable.length);
   } while (usedIndexes.includes(rand));
   usedIndexes.push(rand);
   return rand;
 };
 
 function getMessage() {
-  return vehicles[getRandIndex()];
+  return consolidatedTable[getRandIndex()];
 };
 
 function refreshGrid() {
   usedIndexes = [];
   statusTable = [];
-  
+
+  // Date Stuff
+  var today = new Date();
+  var thisYear = today.getFullYear();
+  var springDate = new Date("April 1," + thisYear);
+  var summerDate = new Date("May 15," + thisYear);
+  var fallDate = new Date("September 15," + thisYear);
+  var winterDate = new Date("November 1," + thisYear);
+
+  consolidatedTable = [...vehicles];
+  if (today < summerDate || today >= fallDate) {
+    // Winter-only phenomena
+    for (var i=0; i<winterOnly.length; i++) {
+      consolidatedTable.push(winterOnly[i]);
+    }
+  } else if (today >= springDate && today < winterDate) {
+    // Summer-only Phenomena
+    for (var i=0; i<summerOnly.length; i++) {
+      consolidatedTable.push(summerOnly[i]);
+    }  
+  }
+
   for (var i=0; i<5; i++) { 
     for (var j=0; j<5; j++) {
       if (i == 2 && j == 2) {
