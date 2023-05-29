@@ -18,7 +18,7 @@ const vehicles = [
   "Ride-In Mini Camper",
   "An 'Oxford Casino' Sign",
   "Pick-Up Truck with Camper on Top",
-  "Pick-Up Truck Towing a Camper with Bed Ledge",
+  "Pick-Up Truck with Bed Ledge Camper",
   "WalMart Truck",
   "Ski Resort Sticker",
   "Grateful Dead Sticker",
