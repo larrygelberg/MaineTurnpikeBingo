@@ -51,14 +51,19 @@ const summerOnly = [
   "A Car with Bikes on the Back",
   "A Car with Bikes on the Top",
   "Dirt Bikes being Towed",
-  "ATVs being Towed"
+  "ATVs being Towed",
+  "Pickup Truck with Flapping Flags",
+  "Surf/Paddle Boards"
 ];
 
 const winterOnly = [
   "Ski Rack w/ Skis or Snowboards",
   "Ski-Mobiles being Towed",
   "A Christmas Tree Truck",
-  "A Plow Gang"
+  "A Plow Gang",
+  "Car with XMas Tree on top",
+  "Car with Rudolph Anters/Nose",
+  "Sheets of Snow Flying off a Roof"
 ];
 
 var statusTable = [];
