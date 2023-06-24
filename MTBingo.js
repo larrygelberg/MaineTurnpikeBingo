@@ -136,6 +136,20 @@ function toggleCell(id) {
     // toggle sqaure off
     document.getElementById(id).style.backgroundColor = null;
     statusTable[i][j] = false;
+    // reset any bingos
+    for (var i=0; i<5; i++) { 
+      for (var j=0; j<5; j++) {
+        if (i == 2 && j == 2) {
+          document.getElementById("c22").style.backgroundColor = "lightgreen";
+        }
+        var cell_name = "c".concat(i.toString().concat(j.toString()));
+        if (statusTable[i][j]) {
+          document.getElementById(cell_name).style.backgroundColor = "lightgreen";
+        } else {
+          document.getElementById(cell_name).style.backgroundColor = null;
+        }
+      }
+    }
   } else {
     document.getElementById(id).style.backgroundColor = "lightgreen";
     statusTable[i][j] = true;
