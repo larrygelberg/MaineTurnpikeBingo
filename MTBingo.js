@@ -30,7 +30,6 @@ const vehicles = [
   "Rhode Island License Plate",
   "New Hampshire License Plate",
   "Vermont License Plate",
-  "Quebec License Plate",
   "A Masshole",
   "State Trooper - Lights Off",
   "State Trooper - Lights On",
@@ -54,6 +53,7 @@ const summerOnly = [
   "Surf/Paddle Boards",
   "A Chopper",
   "A Tricycle",
+  "Quebec License Plate",
   "Convertible, Top-down"
 ];
 
