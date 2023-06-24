@@ -22,24 +22,22 @@ const vehicles = [
   "WalMart Truck",
   "Ski Resort Sticker",
   "Grateful Dead Sticker",
-  "A Stupid Tesla",
   "A Hannaford's Truck",
   "A Lumber Truck",
   "Florida License Plate",
   "New York License Plate",
   "Connecticut License Plate",
   "Rhode Island License Plate",
+  "New Hampshire License Plate",
   "Vermont License Plate",
   "Quebec License Plate",
   "A Masshole",
-  "New Hampshire License Plate",
   "State Trooper - Lights Off",
   "State Trooper - Lights On",
   "Road Kill",
   "Horse Trailer",
   "U-Haul",
   "Thule Topper",
-  "A Chopper",
   "3 or More Motorcycles in a Pack",
 ];
 
@@ -53,7 +51,10 @@ const summerOnly = [
   "Dirt Bikes being Towed",
   "ATVs being Towed",
   "Pickup Truck with Flapping Flags",
-  "Surf/Paddle Boards"
+  "Surf/Paddle Boards",
+  "A Chopper",
+  "A Tricycle",
+  "Convertible, Top-down"
 ];
 
 const winterOnly = [
