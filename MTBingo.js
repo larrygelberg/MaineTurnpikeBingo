@@ -172,7 +172,6 @@ function test_rows() {
         var id = "c".concat(index_i,i);
         document.getElementById(id).style.backgroundColor = "blue";
       }
-      break;
     } 
   }
 }
@@ -188,7 +187,6 @@ function test_columns() {
         var id = "c".concat(i,index_i);
         document.getElementById(id).style.backgroundColor = "blue";
       }
-      break;
     } 
   }
 }
