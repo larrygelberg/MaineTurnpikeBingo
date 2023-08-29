@@ -21,7 +21,6 @@ const vehicles = [
   "Pick-Up Truck with Bed Ledge Camper",
   "WalMart Truck",
   "Ski Resort Sticker",
-  "Grateful Dead Sticker",
   "A Hannaford's Truck",
   "A Lumber Truck",
   "Florida License Plate",
