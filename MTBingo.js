@@ -3,6 +3,7 @@
  * 
  * Copyright 2023 - Larry Gelberg
  */
+const debug = false;
 
 const vehicles = [
   "Hampton Tolls Backup",
@@ -57,13 +58,18 @@ const summerOnly = [
   "Convertible, Top-down"
 ];
 
-const winterOnly = [
+const autumn = [
   "Ski Rack w/ Skis or Snowboards",
   "Ski-Mobiles being Towed",
   "A Christmas Tree Truck",
+  "Car with X-Mas Tree on top",
+  "Car with Rudolph Anters/Nose"
+];
+
+const postXMasWinter = [
+  "Ski Rack w/ Skis or Snowboards",
+  "Ski-Mobiles being Towed",
   "A Plow Gang",
-  "Car with XMas Tree on top",
-  "Car with Rudolph Anters/Nose",
   "Sheets of Snow Flying off a Roof"
 ];
 
@@ -95,22 +101,44 @@ function refreshGrid() {
   // Date Stuff
   var today = new Date();
   var thisYear = today.getFullYear();
+  if (debug) today = new Date("November 5,"+ thisYear);
+  if (debug) console.log("Today is "+today);
+  var postXmasDate = new Date("January 1," + thisYear);
   var springDate = new Date("March 1," + thisYear);
   var summerDate = new Date("April 1," + thisYear);
-  var fallDate = new Date("October 31," + thisYear);
-  var winterDate = new Date("December 1," + thisYear);
+  var autumnDate = new Date("November 1," + thisYear);
 
   consolidatedTable = [...vehicles];
-  if (today < summerDate || today >= fallDate) {
-    // Winter-only phenomena
-    for (var i=0; i<winterOnly.length; i++) {
-      consolidatedTable.push(winterOnly[i]);
+  if (today <= springDate) {
+    // Winter
+    for (var i=0; i<postXMasWinter.length; i++) {
+      consolidatedTable.push(postXMasWinter[i]);
+    } 
+    document.getElementById("modeText").innerText = `Winter`;
+
+  } else  if (today > springDate && today <= summerDate) {
+    // Spring
+    for (var i=0; i<postXMasWinter.length; i++) {
+      consolidatedTable.push(postXMasWinter[i]);
+    } 
+    for (var i=0; i<summerOnly.length; i++) {
+      consolidatedTable.push(summerOnly[i]);
+    } 
+    document.getElementById("modeText").innerText = `Spring`;
+  } else if (today >= autumnDate) {
+    // Autumn
+    for (var i=0; i<autumn.length; i++) {
+      consolidatedTable.push(autumn[i]);
     }
-  } else if (today >= springDate && today < winterDate) {
+    document.getElementById("modeText").innerText = `Autumn`;
+  } else if (today > springDate && today <= autumnDate) {
     // Summer-only Phenomena
     for (var i=0; i<summerOnly.length; i++) {
       consolidatedTable.push(summerOnly[i]);
-    }  
+    }
+    document.getElementById("modeText").innerText = `Summer`;
+  } else {
+    document.getElementById("modeText").innerText = `Found a bug!`;
   }
 
   for (var i=0; i<5; i++) { 
