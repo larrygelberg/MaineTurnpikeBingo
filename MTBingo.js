@@ -55,7 +55,8 @@ const summerOnly = [
   "Surf/Paddle Boards",
   "A Chopper",
   "A Tricycle",
-  "Convertible, Top-down"
+  "Convertible, Top-down",
+  "Food Truck"
 ];
 
 const autumn = [
