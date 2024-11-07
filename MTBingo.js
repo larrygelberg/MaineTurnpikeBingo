@@ -32,14 +32,14 @@ const vehicles = [
   "Vermont License Plate",
   "Canadian License Plate",
   "A Masshole",
-  "State Trooper - Lights Off",
-  "State Trooper - Lights On",
+  "Statie - Lights Off",
+  "Statie - Lights On",
   "Road Kill",
   "Horse Trailer",
   "U-Haul",
   "Thule Topper",
   "3 or More Motorcycles in a Pack",
-  "Cyber Douche"
+  "A Deplorean"
 ];
 
 const summerOnly = [
@@ -51,12 +51,10 @@ const summerOnly = [
   "A Car with Bikes on the Top",
   "Dirt Bikes being Towed",
   "ATVs being Towed",
-  "Flapping Flags",
   "Surf/Paddle Boards",
   "A Chopper",
   "A Tricycle",
-  "Convertible, Top-down",
-  "Food Truck"
+  "Convertible, Top-down"
 ];
 
 const autumn = [
