@@ -7,7 +7,7 @@
   <script src="MTBingo.js"></script>
   <script>
     $( document ).ready(function() {
-      refreshGrid();
+      initialize();
     });
   </script>
 
@@ -24,6 +24,11 @@
   </p>
 
   <!-- Control Center -->
+  Going to / Coming from Maine? 
+  <button id="maineButton" class="toggleButton">
+    <span id="buttonText">Yes</span>
+  </button>
+  <p/>
   <button id="refreshButton" class="btn-class" type="button" onclick="refreshGrid()">Another!</button>
   <br/>
   <p/>
