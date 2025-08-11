@@ -77,28 +77,8 @@ let statusTable = [];
 let usedIndexes = [];
 let consolidatedTable = [];
 let numBingos;
-let maineButton;
-let inMaine;
 
 function initialize () {
-  maineButton = document.getElementById("maineButton");
-  maineButton.classList.add("inMaine");
-  inMaine = true;
-
-  maineButton.addEventListener("click", () => {
-    inMaine = !inMaine;
-
-    if (inMaine) {
-      maineButton.textContent = "Yes";
-      maineButton.classList.add("inMaine");
-      maineButton.style.backgroundColor = 'green';
-    } else {
-      maineButton.textContent = "No";
-      maineButton.classList.remove("inMaine");
-      maineButton.style.backgroundColor = 'grey';
-    } 
-  });
-
   refreshGrid();
 }
 
@@ -134,18 +114,21 @@ function refreshGrid() {
       consolidatedTable.push(summerOnly[i]);
     } 
     document.getElementById("modeText").innerText = `Spring`;
+
   } else if (today >= autumnDate) {
     // Autumn
     for (let i=0; i<autumn.length; i++) {
       consolidatedTable.push(autumn[i]);
     }
     document.getElementById("modeText").innerText = `Autumn`;
+
   } else if (today > springDate && today <= autumnDate) {
     // Summer-only Phenomena
     for (let i=0; i<summerOnly.length; i++) {
       consolidatedTable.push(summerOnly[i]);
     }
     document.getElementById("modeText").innerText = `Summer`;
+    
   } else {
     document.getElementById("modeText").innerText = `Found a bug!`;
   }
@@ -184,14 +167,7 @@ function getRandIndex() {
 };
 
 function getMessage() {
-  let inMaine = maineButton.classList.contains("inMaine")
-  let str = consolidatedTable[getRandIndex()]; 
-  if (!inMaine) {
-    do {
-        str = consolidatedTable[getRandIndex()];
-    } while (str == "Hampton Tolls Backup" || str == "An 'Oxford Casino' Sign");
-  }
-  return str;
+  return consolidatedTable[getRandIndex()];;
 };
 
 function toggleCell(id) { 
