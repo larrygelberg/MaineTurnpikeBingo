@@ -6,6 +6,7 @@ body{
 
 .containing-table {
     display: table;
+    table-layout: fixed;  /* every row gets the same 5 equal columns */
     width: 100%;
 }
 
@@ -23,7 +24,24 @@ body{
 
 .content {
     display: inline-block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
     vertical-align: top; /* Removes the extra white space below the baseline */
+}
+
+/* Shrink square text on narrow (phone) screens so long words fit */
+@media (max-width: 600px) {
+    .centre-align {
+        padding: 4px 2px;
+    }
+    .content h3 {
+        font-size: 3.1vw;
+    }
+    .content h2 {
+        font-size: 4.2vw;
+    }
 }
 
 .btn-class {
