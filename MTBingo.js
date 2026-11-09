@@ -173,51 +173,28 @@ function refreshGrid() {
   statusTable = [];
   numBingos = 0;
 
-  // Date Stuff
+  // Pick the season from the month (0 = January ... 11 = December)
   let today = new Date();
-  let thisYear = today.getFullYear();
-  if (debug) today = new Date("November 5,"+ thisYear);
-  if (debug) console.log("Today is "+today);
-  let postXmasDate = new Date("January 1," + thisYear);
-  let springDate = new Date("March 1," + thisYear);
-  let summerDate = new Date("April 1," + thisYear);
-  let autumnDate = new Date("November 1," + thisYear);
+  if (debug) today = new Date(today.getFullYear(), 10, 5);  // November 5
+  if (debug) console.log("Today is " + today);
+  let month = today.getMonth();
 
-  consolidatedTable = [...vehicles];
-  if (today <= springDate) {
-    // Winter
-    for (let i=0; i<postXMasWinter.length; i++) {
-      consolidatedTable.push(postXMasWinter[i]);
-    } 
-    document.getElementById("modeText").innerText = `Winter`;
-
-  } else  if (today > springDate && today <= summerDate) {
-    // Spring
-    for (let i=0; i<postXMasWinter.length; i++) {
-      consolidatedTable.push(postXMasWinter[i]);
-    } 
-    for (let i=0; i<summerOnly.length; i++) {
-      consolidatedTable.push(summerOnly[i]);
-    } 
-    document.getElementById("modeText").innerText = `Spring`;
-
-  } else if (today >= autumnDate) {
-    // Autumn
-    for (let i=0; i<autumn.length; i++) {
-      consolidatedTable.push(autumn[i]);
-    }
-    document.getElementById("modeText").innerText = `Autumn`;
-
-  } else if (today > springDate && today <= autumnDate) {
-    // Summer-only Phenomena
-    for (let i=0; i<summerOnly.length; i++) {
-      consolidatedTable.push(summerOnly[i]);
-    }
-    document.getElementById("modeText").innerText = `Summer`;
-    
-  } else {
-    document.getElementById("modeText").innerText = `Found a bug!`;
+  let season, extras;
+  if (month <= 1) {          // January - February
+    season = "Winter";
+    extras = postXMasWinter;
+  } else if (month == 2) {   // March
+    season = "Spring";
+    extras = [...postXMasWinter, ...summerOnly];
+  } else if (month <= 9) {   // April - October
+    season = "Summer";
+    extras = summerOnly;
+  } else {                   // November - December
+    season = "Autumn";
+    extras = autumn;
   }
+  consolidatedTable = [...vehicles, ...extras];
+  document.getElementById("modeText").innerText = season;
 
   // Shuffle the season's list and deal 24 different squares from it
   let picks = shuffled(consolidatedTable).slice(0, 24);
