@@ -153,8 +153,9 @@ function renderBoard() {
   for (let i=0; i<5; i++) {
     for (let j=0; j<5; j++) {
       let cell_name = "c" + i + j;
-      document.getElementById(cell_name).style.backgroundColor =
-        statusTable[i][j] ? "lightgreen" : null;
+      let el = document.getElementById(cell_name);
+      el.classList.toggle("marked", statusTable[i][j]);
+      el.classList.remove("bingo");
     }
   }
   numBingos = 0;
@@ -162,7 +163,7 @@ function renderBoard() {
     if (line.every(([i, j]) => statusTable[i][j])) {
       numBingos++;
       for (let [i, j] of line) {
-        document.getElementById("c" + i + j).style.backgroundColor = "blue";
+        document.getElementById("c" + i + j).classList.add("bingo");
       }
     }
   }
@@ -202,22 +203,15 @@ function refreshGrid() {
 
   for (let i=0; i<5; i++) { 
     for (let j=0; j<5; j++) {
-      if (i == 2 && j == 2) {
-        document.getElementById("c22").style.backgroundColor = "lightgreen";
-      } else {
-        let cell = i.toString().concat(j.toString());
-        document.getElementById(cell).innerHTML = picks.pop();
-        let outerDiv = "c".concat(cell);
-        document.getElementById(outerDiv).style.backgroundColor = null;
-    }
+      if (!(i == 2 && j == 2)) {
+        document.getElementById("" + i + j).innerHTML = picks.pop();
+      }
     }
     statusTable.push([false, false, false, false, false]);
   }
   statusTable[2][2] = true;  // Set the Free Space
 
-  numBingos = 0;
-  document.getElementById("winText").innerText = `You now have ${numBingos} Bingos!`;
-
+  renderBoard();
   saveState();
 }
 
