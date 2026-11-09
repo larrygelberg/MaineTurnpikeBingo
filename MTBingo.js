@@ -75,6 +75,15 @@ const postXMasWinter = [
   "Ski Resort Sticker"
 ];
 
+// The 12 ways to win: each line is a list of [row, column] squares
+const LINES = [];
+for (let k=0; k<5; k++) {
+  LINES.push([0,1,2,3,4].map(x => [k, x]));    // row k
+  LINES.push([0,1,2,3,4].map(x => [x, k]));    // column k
+}
+LINES.push([0,1,2,3,4].map(x => [x, x]));      // top-left to bottom-right
+LINES.push([0,1,2,3,4].map(x => [4 - x, x]));  // bottom-left to top-right
+
 let statusTable = [];
 let consolidatedTable = [];
 let numBingos;
@@ -149,10 +158,14 @@ function renderBoard() {
     }
   }
   numBingos = 0;
-  test_rows();
-  test_columns();
-  test_ul_to_lr();
-  test_ur_to_ll();
+  for (let line of LINES) {
+    if (line.every(([i, j]) => statusTable[i][j])) {
+      numBingos++;
+      for (let [i, j] of line) {
+        document.getElementById("c" + i + j).style.backgroundColor = "blue";
+      }
+    }
+  }
   document.getElementById("winText").innerText = `You now have ${numBingos} Bingos!`;
 }
 
@@ -247,69 +260,4 @@ function toggleCell(id) {
   statusTable[i][j] = !statusTable[i][j];
   renderBoard();
   saveState();
-}
-
-function test_rows() {
-  for (let index_i=0; index_i<=4; index_i++) {
-    let winner = true;
-    for (let index_j=0; index_j<=4; index_j++) {
-      winner = winner && statusTable[index_i][index_j];
-    }
-    if (winner) {
-      incrementWins();
-      for (let i=0; i<5; i++) {
-        let id = "c".concat(index_i,i);
-        document.getElementById(id).style.backgroundColor = "blue";
-      }
-    } 
-  }
-}
-
-function test_columns() {
-  for (let index_i=0; index_i<=4; index_i++) {
-    let winner = true;
-    for (let index_j=0; index_j<=4; index_j++) {
-      winner = winner && statusTable[index_j][index_i];
-    }
-    if (winner) {
-      incrementWins();
-      for (let i=0; i<5; i++) {
-        let id = "c".concat(i,index_i);
-        document.getElementById(id).style.backgroundColor = "blue";
-      }
-    } 
-  }
-}
-
-function test_ul_to_lr () {
-  let winner = true;
-  for (let index_i=0; index_i<=4; index_i++) {
-    winner = winner && statusTable[index_i][index_i];
-  }
-  if (winner) {
-    incrementWins();
-    for (let i=0; i<5; i++) {
-      let id = "c".concat(i,i);
-      document.getElementById(id).style.backgroundColor = "blue";
-    }
-  }
-}
-
-function test_ur_to_ll() {
-  let winner = true;
-  for (let index_i=0; index_i<=4; index_i++) {
-    winner = winner && statusTable[4-index_i][index_i];
-  }
-  if (winner) {
-    incrementWins();
-    for (let i=0; i<5; i++) {
-      let id = "c".concat(4-i,i);
-      document.getElementById(id).style.backgroundColor = "blue";
-    }
-  } 
-}
-
-function incrementWins() {
-  numBingos++;
-  document.getElementById("winText").innerText = `You now have ${numBingos} Bingos!`;
 }
