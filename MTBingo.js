@@ -63,9 +63,13 @@ const autumn = [
   "Ski Rack w/ Skis or Snowboards",
   "Ski-Mobiles being Towed",
   "A Christmas Tree Truck",
-  "Car with X-Mas Tree on top",
-  "Car with Rudolph Antlers / Nose",
   "Ski Resort Sticker"
+];
+
+// December only, added on top of the autumn list
+const december = [
+  "Car with X-Mas Tree on top",
+  "Car with Rudolph Antlers / Nose"
 ];
 
 const postXMasWinter = [
@@ -222,9 +226,12 @@ function refreshGrid() {
   } else if (month <= 9) {   // April - October
     season = "Summer";
     extras = summerOnly;
-  } else {                   // November - December
+  } else if (month == 10) {  // November
     season = "Autumn";
     extras = autumn;
+  } else {                   // December
+    season = "December";
+    extras = [...autumn, ...december];
   }
   consolidatedTable = [...vehicles, ...extras];
   document.getElementById("modeText").innerText = season;
