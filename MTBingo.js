@@ -40,7 +40,7 @@ const vehicles = [
   "U-Haul",
   "Thule Topper",
   "3 or More Motorcycles in a Pack",
-  "Large Cooler"
+  "Big Ass Cooler"
 ];
 
 const summerOnly = [
