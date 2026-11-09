@@ -76,7 +76,6 @@ const postXMasWinter = [
 ];
 
 let statusTable = [];
-let usedIndexes = [];
 let consolidatedTable = [];
 let numBingos;
 
@@ -158,7 +157,6 @@ function renderBoard() {
 }
 
 function refreshGrid() {
-  usedIndexes = [];
   statusTable = [];
   numBingos = 0;
 
@@ -208,14 +206,17 @@ function refreshGrid() {
     document.getElementById("modeText").innerText = `Found a bug!`;
   }
 
+  // Shuffle the season's list and deal 24 different squares from it
+  let picks = shuffled(consolidatedTable).slice(0, 24);
+  if (picks.length < 24) console.error("Not enough squares for this season!");
+
   for (let i=0; i<5; i++) { 
     for (let j=0; j<5; j++) {
       if (i == 2 && j == 2) {
         document.getElementById("c22").style.backgroundColor = "lightgreen";
       } else {
         let cell = i.toString().concat(j.toString());
-        let msg = getMessage();
-        document.getElementById(cell).innerHTML = msg;
+        document.getElementById(cell).innerHTML = picks.pop();
         let outerDiv = "c".concat(cell);
         document.getElementById(outerDiv).style.backgroundColor = null;
     }
@@ -230,21 +231,15 @@ function refreshGrid() {
   saveState();
 }
 
-function getRandIndex() {
-  let count = 0;
-  let rand = -1;
-  do {
-    if (count++ > 1000)
-      break;
-    rand = Math.floor(Math.random() * consolidatedTable.length);
-  } while (usedIndexes.includes(rand));
-  usedIndexes.push(rand);
-  return rand;
-};
-
-function getMessage() {
-  return consolidatedTable[getRandIndex()];;
-};
+// Return a shuffled copy of arr (Fisher-Yates shuffle)
+function shuffled(arr) {
+  let a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 function toggleCell(id) {
   let i = id[1];
