@@ -23,7 +23,7 @@ const vehicles = [
   "Pick-Up Truck with Camper on Top",
   "Fifth Wheel RV",
   "WalMart Truck",
-  "A Hannaford's Truck",
+  "A Hannaford Truck",
   "A Lumber Truck",
   "Florida License Plate",
   "New York License Plate",
@@ -46,12 +46,12 @@ const summerOnly = [
   "Jet Skis Being Towed",
   "A Boat Being Towed",
   "A Pontoon Boat Being Towed",
-  "Kayaks/Canoes", 
+  "Kayaks / Canoes",
   "A Car with Bikes on the Back",
   "A Car with Bikes on the Top",
   "Dirt Bikes being Towed",
   "ATVs being Towed",
-  "Surf/Paddle Boards",
+  "Surf / Paddle Boards",
   "A Chopper",
   "A Tricycle",
   "Convertible, Top-down",
@@ -63,7 +63,7 @@ const autumn = [
   "Ski-Mobiles being Towed",
   "A Christmas Tree Truck",
   "Car with X-Mas Tree on top",
-  "Car with Rudolph Anters/Nose",
+  "Car with Rudolph Antlers / Nose",
   "Ski Resort Sticker"
 ];
 

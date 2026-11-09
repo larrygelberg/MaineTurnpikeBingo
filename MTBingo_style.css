@@ -4,6 +4,10 @@ body{
    font-family: 'Noto Sans',serif;
 }
 
+main {
+   text-align: center;
+}
+
 .containing-table {
     display: table;
     table-layout: fixed;  /* every row gets the same 5 equal columns */
