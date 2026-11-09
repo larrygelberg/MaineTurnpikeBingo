@@ -78,8 +78,81 @@ let usedIndexes = [];
 let consolidatedTable = [];
 let numBingos;
 
+const STORAGE_KEY = "MTBingoState";
+const STATE_MAX_AGE_MS = 12 * 60 * 60 * 1000;  // Saved boards expire after 12 hours idle
+
 function initialize () {
-  refreshGrid();
+  // iOS (and other mobile browsers) may discard the page while the device
+  // sleeps and reload it on wake, so restore the saved board if there is one.
+  if (!loadState()) {
+    refreshGrid();
+  }
+}
+
+function saveState() {
+  try {
+    let labels = [];
+    for (let i=0; i<5; i++) {
+      let row = [];
+      for (let j=0; j<5; j++) {
+        row.push(document.getElementById("" + i + j).innerHTML);
+      }
+      labels.push(row);
+    }
+    let state = {
+      labels: labels,
+      statusTable: statusTable,
+      mode: document.getElementById("modeText").innerText,
+      savedAt: Date.now()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    // Storage unavailable (e.g. some private-browsing modes) - just don't persist.
+  }
+}
+
+function loadState() {
+  try {
+    let state = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (!state || !Array.isArray(state.labels) || !Array.isArray(state.statusTable) ||
+        state.labels.length != 5 || state.statusTable.length != 5) {
+      return false;
+    }
+    if (typeof state.savedAt != "number" || Date.now() - state.savedAt > STATE_MAX_AGE_MS) {
+      localStorage.removeItem(STORAGE_KEY);
+      return false;
+    }
+    for (let i=0; i<5; i++) {
+      for (let j=0; j<5; j++) {
+        if (i == 2 && j == 2) continue;  // Free Space label lives in the HTML
+        document.getElementById("" + i + j).innerHTML = state.labels[i][j];
+      }
+    }
+    statusTable = state.statusTable;
+    statusTable[2][2] = true;
+    document.getElementById("modeText").innerText = state.mode;
+    renderBoard();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Color every cell from statusTable, then highlight and count any bingos.
+function renderBoard() {
+  for (let i=0; i<5; i++) {
+    for (let j=0; j<5; j++) {
+      let cell_name = "c" + i + j;
+      document.getElementById(cell_name).style.backgroundColor =
+        statusTable[i][j] ? "lightgreen" : null;
+    }
+  }
+  numBingos = 0;
+  test_rows();
+  test_columns();
+  test_ul_to_lr();
+  test_ur_to_ll();
+  document.getElementById("winText").innerText = `You now have ${numBingos} Bingos!`;
 }
 
 function refreshGrid() {
@@ -152,6 +225,7 @@ function refreshGrid() {
   numBingos = 0;
   document.getElementById("winText").innerText = `You now have ${numBingos} Bingos!`;
 
+  saveState();
 }
 
 function getRandIndex() {
@@ -170,37 +244,12 @@ function getMessage() {
   return consolidatedTable[getRandIndex()];;
 };
 
-function toggleCell(id) { 
+function toggleCell(id) {
   let i = id[1];
   let j = id[2];
-  if (statusTable[i][j]) {
-    // toggle sqaure off
-    document.getElementById(id).style.backgroundColor = null;
-    statusTable[i][j] = false;
-    // reset any bingos
-    for (let i=0; i<5; i++) { 
-      for (let j=0; j<5; j++) {
-        if (i == 2 && j == 2) {
-          document.getElementById("c22").style.backgroundColor = "lightgreen";
-        }
-        let cell_name = "c".concat(i.toString().concat(j.toString()));
-        if (statusTable[i][j]) {
-          document.getElementById(cell_name).style.backgroundColor = "lightgreen";
-        } else {
-          document.getElementById(cell_name).style.backgroundColor = null;
-        }
-      }
-    }
-  } else {
-    document.getElementById(id).style.backgroundColor = "lightgreen";
-    statusTable[i][j] = true;
-  }
-
-  numBingos = 0;
-  test_rows();
-  test_columns();
-  test_ul_to_lr();
-  test_ur_to_ll();
+  statusTable[i][j] = !statusTable[i][j];
+  renderBoard();
+  saveState();
 }
 
 function test_rows() {
