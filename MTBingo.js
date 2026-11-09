@@ -91,7 +91,38 @@ let numBingos;
 const STORAGE_KEY = "MTBingoState";
 const STATE_MAX_AGE_MS = 12 * 60 * 60 * 1000;  // Saved boards expire after 12 hours idle
 
+// Create the 25 squares. Each square is <div id="cIJ"> holding a heading
+// with id "IJ" for the label (I = row, J = column).
+function buildBoard() {
+  let board = document.getElementById("board");
+  for (let i=0; i<5; i++) {
+    let row = document.createElement("div");
+    row.className = "containing-table";
+    for (let j=0; j<5; j++) {
+      let cell = document.createElement("div");
+      cell.id = "c" + i + j;
+      cell.className = "centre-align border-cell";
+
+      let content = document.createElement("div");
+      content.className = "content";
+      let label = document.createElement(i == 2 && j == 2 ? "h2" : "h3");
+      label.id = "" + i + j;
+      content.appendChild(label);
+      cell.appendChild(content);
+
+      if (i == 2 && j == 2) {
+        label.textContent = "FREE SPACE!";
+      } else {
+        cell.addEventListener("click", () => toggleCell(cell.id));
+      }
+      row.appendChild(cell);
+    }
+    board.appendChild(row);
+  }
+}
+
 function initialize () {
+  buildBoard();
   // iOS (and other mobile browsers) may discard the page while the device
   // sleeps and reload it on wake, so restore the saved board if there is one.
   if (!loadState()) {
