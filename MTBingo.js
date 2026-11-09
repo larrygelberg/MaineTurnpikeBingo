@@ -232,3 +232,5 @@ function toggleCell(id) {
   renderBoard();
   saveState();
 }
+
+initialize();
