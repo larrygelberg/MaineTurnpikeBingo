@@ -3,6 +3,8 @@
  * 
  * Copyright 2023 - Larry Gelberg
  */
+"use strict";
+
 const debug = false;
 
 const vehicles = [
@@ -211,10 +213,10 @@ function refreshGrid() {
       if (i == 2 && j == 2) {
         document.getElementById("c22").style.backgroundColor = "lightgreen";
       } else {
-        cell = i.toString().concat(j.toString());
-        msg = getMessage();
+        let cell = i.toString().concat(j.toString());
+        let msg = getMessage();
         document.getElementById(cell).innerHTML = msg;
-        outerDiv = "c".concat(cell);
+        let outerDiv = "c".concat(cell);
         document.getElementById(outerDiv).style.backgroundColor = null;
     }
     }
@@ -291,7 +293,7 @@ function test_ul_to_lr () {
   }
   if (winner) {
     incrementWins();
-    for (i=0; i<5; i++) {
+    for (let i=0; i<5; i++) {
       let id = "c".concat(i,i);
       document.getElementById(id).style.backgroundColor = "blue";
     }
@@ -305,7 +307,7 @@ function test_ur_to_ll() {
   }
   if (winner) {
     incrementWins();
-    for (i=0; i<5; i++) {
+    for (let i=0; i<5; i++) {
       let id = "c".concat(4-i,i);
       document.getElementById(id).style.backgroundColor = "blue";
     }
