@@ -1,0 +1,7 @@
+# Make browsers check for a newer version of the game files on every visit
+# (they still reuse their copy if nothing changed), so updates show up right away.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
